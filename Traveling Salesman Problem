@@ -1,0 +1,62 @@
+Traveling Salesman Problem
+#include <stdio.h>
+#include <stdbool.h>
+
+#define V 4 
+
+int nearestNeighbor(int graph[V][V], int visited[], int vertex) {
+    int nearest = -1;
+    int minDist = 999; 
+    for (int i = 0; i < V; i++) {
+        if (!visited[i] && graph[vertex][i] && graph[vertex][i] < minDist) {
+            minDist = graph[vertex][i];
+            nearest = i;
+        }
+    }
+    return nearest;
+}
+
+void tspNearestNeighbor(int graph[V][V], int startVertex) {
+    int visited[V];
+    for (int i = 0; i < V; i++)
+        visited[i] = false;
+
+    int path[V + 1];
+    int pathLength = 0;
+
+    int currentVertex = startVertex;
+    visited[currentVertex] = true;
+    path[pathLength++] = currentVertex;
+
+    for (int count = 0; count < V - 1; count++) {
+        int nearest = nearestNeighbor(graph, visited, currentVertex);
+        visited[nearest] = true;
+        path[pathLength++] = nearest;
+        currentVertex = nearest;
+    }
+
+    path[pathLength++] = startVertex;
+
+    printf("Shortest TSP tour using Nearest Neighbor Algorithm: ");
+    for (int i = 0; i < pathLength; i++) {
+        printf("%d ", path[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+
+    int graph[V][V] = {
+        {0, 10, 15, 20},
+        {10, 0, 35, 25},
+        {15, 35, 0, 30},
+        {20, 25, 30, 0}
+    };
+
+    int startVertex = 0; 
+
+   
+    tspNearestNeighbor(graph, startVertex);
+
+    return 0;
+}
