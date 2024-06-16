@@ -1,0 +1,50 @@
+Reversing 32-bit signed integers
+
+#include <stdio.h>
+
+int reverseInteger(int num) {
+    int reversed = 0;
+    while (num != 0) {
+        int digit = num % 10;
+        reversed = reversed * 10 + digit;
+        num /= 10;
+    }
+    return reversed;
+}
+
+int main() {
+    int num = -12345;
+    int reversedNum = reverseInteger(num);
+    printf("Reversed Number: %d\n", reversedNum);
+    return 0;
+}
+
+
+28. Check for a valid String
+#include <stdio.h>
+#include <string.h>
+
+int isValidString(char *str) {
+    if (str == NULL) {
+        return 0; 
+    }
+
+    int length = strlen(str);
+    if (length == 0 || str[length - 1] != '\0') {
+        return 0; 
+    }
+
+    return 1; g
+}
+
+int main() {
+    char str[] = "Hello, World!";
+    
+    if (isValidString(str)) {
+        printf("The string is valid.\n");
+    } else {
+        printf("The string is not valid.\n");
+    }
+
+    return 0;
+}
