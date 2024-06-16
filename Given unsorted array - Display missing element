@@ -1,0 +1,45 @@
+Given unsorted array - Display missing element
+#include <stdio.h>
+#include <stdbool.h>
+void displayMissingElements(int arr[], int size) {
+  
+    int minElement = arr[0];
+    int maxElement = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minElement)
+            minElement = arr[i];
+        if (arr[i] > maxElement)
+            maxElement = arr[i];
+    }
+
+    bool found = false; 
+
+    for (int i = minElement; i <= maxElement; i++) {
+        bool present = false; 
+        for (int j = 0; j < size; j++) {
+            if (arr[j] == i) {
+                present = true;
+                break;
+            }
+        }
+        if (!present) {
+            found = true;
+            printf("%d ", i); 
+        }
+    }
+
+    if (!found) {
+        printf("No missing elements in the array.\n");
+    }
+}
+
+int main() {
+    int arr[] = {4, 2, 3, 8, 9, 7}; 
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Missing elements: ");
+    displayMissingElements(arr, size);
+    printf("\n");
+
+    return 0;
+}
