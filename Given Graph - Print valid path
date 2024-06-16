@@ -1,0 +1,52 @@
+Given Graph - Print valid path
+#include <stdio.h>
+#include <stdbool.h>
+
+#define V 5 
+
+bool visited[V]; 
+
+int graph[V][V] = {
+    {0, 1, 1, 0, 0},
+    {1, 0, 1, 1, 0},
+    {1, 1, 0, 1, 1},
+    {0, 1, 1, 0, 1},
+    {0, 0, 1, 1, 0}
+};
+
+void DFS(int source, int destination, int path[], int pathIndex) {
+    visited[source] = true;
+    path[pathIndex] = source;
+    pathIndex++;
+
+    if (source == destination) {
+        printf("Valid path: ");
+        for (int i = 0; i < pathIndex; i++) {
+            printf("%d ", path[i]);
+        }
+        printf("\n");
+    } else {
+        for (int i = 0; i < V; i++) {
+            if (graph[source][i] && !visited[i]) {
+                DFS(i, destination, path, pathIndex);
+            }
+        }
+    }
+
+    visited[source] = false;
+}
+
+int main() {
+    int source = 0; 
+    int destination = 4; 
+    int path[V]; 
+
+    for (int i = 0; i < V; i++) {
+        visited[i] = false;
+    }
+
+    printf("Valid paths from vertex %d to vertex %d:\n", source, destination);
+    DFS(source, destination, path, 0);
+
+    return 0;
+}
