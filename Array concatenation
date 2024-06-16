@@ -1,0 +1,38 @@
+Array concatenation
+#include <stdio.h>
+
+void concatenateArrays(int arr1[], int size1, int arr2[], int size2, int result[]) {
+    int i, j;
+
+    for (i = 0; i < size1; i++) {
+        result[i] = arr1[i];
+    }
+
+    for (j = 0; j < size2; j++) {
+        result[i + j] = arr2[j];
+    }
+}
+
+void displayArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr1[] = {1, 2, 3, 4, 5};
+    int size1 = sizeof(arr1) / sizeof(arr1[0]);
+
+    int arr2[] = {6, 7, 8, 9, 10};
+    int size2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    int result[size1 + size2]; 
+
+    concatenateArrays(arr1, size1, arr2, size2, result);
+
+    printf("Concatenated array: ");
+    displayArray(result, size1 + size2);
+
+    return 0;
+}
