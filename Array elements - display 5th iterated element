@@ -1,0 +1,16 @@
+given set of Array elements - display 5th iterated element
+#include <stdio.h>
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50, 60, 70}; 
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    if (size >= 5) {
+        int fifthIteratedElement = arr[4];
+        printf("5th iterated element: %d\n", fifthIteratedElement);
+    } else {
+        printf("Array size is less than 5. Cannot access 5th iterated element.\n");
+    }
+
+    return 0;
+}
