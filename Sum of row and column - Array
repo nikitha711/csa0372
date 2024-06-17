@@ -1,0 +1,32 @@
+Sum of row and column - Array
+#include <stdio.h>
+int main() {
+    int m, n; 
+    printf("Enter the number of rows and columns: ");
+    scanf("%d %d", &m, &n);
+    int arr[m][n]; 
+    printf("Enter the elements of the matrix:\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &arr[i][j]);
+        }
+    }
+    printf("Sum of each row:\n");
+    for (int i = 0; i < m; i++) {
+        int rsum = 0;
+        for (int j = 0; j < n; j++) {
+            rsum += arr[i][j];
+        }
+        printf("Sum of row %d is %d\n", i, rsum);
+    }
+    printf("Sum of each column:\n");
+    for (int j = 0; j < n; j++) {
+        int csum = 0;
+        for (int i = 0; i < m; i++) {
+            csum += arr[i][j];
+        }
+        printf("Sum of column %d is %d\n", j, csum);
+    }
+
+    return 0;
+}
