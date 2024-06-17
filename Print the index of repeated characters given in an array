@@ -1,0 +1,24 @@
+Print the index of repeated characters given in an array
+#include <stdio.h>
+#include <string.h>
+void printRepeated(char str[]) {
+    int length = strlen(str);
+    int freq[256] = {0}; 
+    int i;
+    for (i = 0; i < length; i++) {
+        freq[(int)str[i]]++;
+    }
+    for (i = 0; i < length; i++) {
+        if (freq[(int)str[i]] > 1) {
+            printf("Character '%c' is repeated at index %d\n", str[i], i);
+        }
+    }
+}
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+    printf("Index of repeated characters in the string: \n");
+    printRepeated(str);
+    return 0;
+}
