@@ -1,0 +1,72 @@
+Stack using two queues
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct {
+    int *arr;
+    int front, rear, size;
+} Queue;
+Queue *createQueue(int capacity) {
+    Queue *q = (Queue *)malloc(sizeof(Queue));
+    q->arr = (int *)malloc(capacity * sizeof(int));
+    q->front = q->rear = -1;
+    q->size = capacity;
+    return q;
+}
+int isEmpty(Queue *q) {
+    return (q->front == -1 && q->rear == -1);
+}
+int isFull(Queue *q) {
+    return (q->rear == q->size - 1);
+}
+void enqueue(Queue *q, int data) {
+    if (isFull(q))
+        return;
+    if (isEmpty(q))
+        q->front = q->rear = 0;
+    else
+        q->rear++;
+    q->arr[q->rear] = data;
+}
+int dequeue(Queue *q) {
+    if (isEmpty(q))
+        return -1;
+    int data = q->arr[q->front];
+    if (q->front == q->rear)
+        q->front = q->rear = -1;
+    else
+        q->front++;
+    return data;
+}
+typedef struct {
+    Queue *q1, *q2;
+} Stack;
+Stack *createStack() {
+    Stack *s = (Stack *)malloc(sizeof(Stack));
+    s->q1 = createQueue(1000);
+    s->q2 = createQueue(1000);
+    return s;
+}
+void push(Stack *s, int data) {
+    enqueue(s->q2, data);
+    while (!isEmpty(s->q1)) {
+        enqueue(s->q2, dequeue(s->q1));
+    }
+    Queue *temp = s->q1;
+    s->q1 = s->q2;
+    s->q2 = temp;
+}
+int pop(Stack *s) {
+    if (isEmpty(s->q1))
+        return -1;
+    return dequeue(s->q1);
+}
+int main() {
+    Stack *s = createStack();
+    push(s, 1);
+    push(s, 2);
+    push(s, 3);
+    printf("Popped element: %d\n", pop(s));
+    printf("Popped element: %d\n", pop(s));
+    printf("Popped element: %d\n", pop(s));
+    return 0;
+}
