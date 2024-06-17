@@ -1,0 +1,72 @@
+Print no of nodes in the given linked list
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+void createNodeList(int n);
+int NodeCount();
+void displayList();
+int main() {
+    int n, totalNode;
+    printf("\n\n Linked List : Create a singly linked list and count the number of nodes :\n");
+    printf("------------------------------------------------------------------------------\n");
+    printf(" Input the number of nodes : ");
+    scanf("%d", &n);
+    createNodeList(n);
+
+    printf("\n Data entered in the list are : \n");
+    displayList();
+    totalNode = NodeCount();
+    printf("\n Total number of nodes = %d\n", totalNode);
+
+    return 0;
+}
+void createNodeList(int n) {
+    Node* fnNode, *tmp;
+    int num, i;
+
+    Node* stnode = (Node*)malloc(sizeof(Node));
+
+    if (stnode == NULL) {
+        printf("Memory not allocated.\n");
+        return;
+    }
+
+    stnode->data = 0;
+    stnode->next = NULL;
+
+    for (i = 1; i <= n; i++) {
+        fnNode = (Node*)malloc(sizeof(Node));
+        if (fnNode == NULL) {
+            printf("Memory not allocated.\n");
+            return;
+        }
+        fnNode->data = i;
+        fnNode->next = stnode->next;
+        stnode->next = fnNode;
+    }
+}
+
+int NodeCount() {
+    Node* tmp;
+    int count = 0;
+
+    // Traverse the linked list
+    tmp = stnode->next;
+    while (tmp != NULL) {
+        count++;
+        tmp = tmp->next;
+    }
+
+    return count;
+}
+void displayList() {
+    Node* tmp;
+    tmp = stnode->next;
+    while (tmp != NULL) {
+        printf(" Data = %d\n", tmp->data);
+        tmp = tmp->next;
+    }
+}
