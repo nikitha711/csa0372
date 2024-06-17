@@ -1,0 +1,50 @@
+Palindrome using SLL
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+void insertAtBeginning(Node** head, int data) {
+    Node* newNode = createNode(data);
+    newNode->next = *head;
+    *head = newNode;
+}
+void printList(Node* head) {
+    while (head != NULL) {
+        printf("%d ", head->data);
+        head = head->next;
+    }
+    printf("\n");
+}
+int isPalindrome(Node* head) {
+    Node* slow = head;
+    Node* fast = head;
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    Node* prev = NULL;
+    Node* current = slow;
+    while (current != NULL) {
+        Node* next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    Node* first = head;
+    Node* second = prev;
+    while (second != NULL) {
+        if (first->data != second->data) {
+            return 0;
+        }
+        first = first->next;
+        second = second->next;
+    }
+    return
